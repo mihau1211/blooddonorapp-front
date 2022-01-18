@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './css/blooddrop.css'
 import LoginForm from './forms/LoginForm';
 import RegisterForm from './forms/RegisterForm';
 import DonationForm from './forms/DonationForm';
@@ -11,11 +12,11 @@ class App extends React.Component {
   render() {
     return (
       <Container className="App">
-        {/* <LoginForm></LoginForm> */}
+        <LoginForm></LoginForm>
         {/* <RegisterForm></RegisterForm> */}
         {/* <DonationForm></DonationForm> */}
         {/* <ForgotPassword></ForgotPassword> */}
-        <TitleBar></TitleBar>
+        {/* <TitleBar></TitleBar> */}
       </Container>
     );
   }
