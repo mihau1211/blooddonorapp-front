@@ -1,0 +1,16 @@
+.title-bar{
+    background-color: red;
+    width: 20vh;
+    height: 100vh;
+    float: left;
+}
+
+.nav-button {
+    margin-top: 4vh;
+
+}
+
+.btn {
+    display: block !important;
+    margin-left: 26% !important;
+}

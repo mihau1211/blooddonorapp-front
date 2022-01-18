@@ -1,0 +1,9 @@
+.tearDobry {
+  width: 200px;
+  height: 200px;
+  border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+  border: 3px solid black;
+  transform: rotate(-45deg);
+  margin-top: 20px;
+  background: linear-gradient(45deg, red 20%, transparent 0);
+}
