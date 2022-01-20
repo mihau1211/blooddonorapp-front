@@ -5,7 +5,7 @@ import "../css/forms.css";
 class DonationForm extends React.Component {
     render() {
         return (
-            <Container className="donation-form">
+            <div className="donation-form">
                 <Form.Label className="form-title">Add new donation</Form.Label>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -20,7 +20,7 @@ class DonationForm extends React.Component {
                         Add donation
                     </Button>
                 </Form>
-            </Container>
+            </div>
         )
     }
 }

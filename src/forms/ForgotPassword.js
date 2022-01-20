@@ -4,7 +4,7 @@ import { Container, Form, Button } from "react-bootstrap";
 class ForgotPassword extends React.Component {
     render() {
         return (
-            <Container className="donation-form">
+            <div className="donation-form">
                 <Form.Label className="form-title">Remind your password</Form.Label>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -15,7 +15,7 @@ class ForgotPassword extends React.Component {
                         Add donation
                     </Button>
                 </Form>
-            </Container>
+            </div>
         )
     }
 }

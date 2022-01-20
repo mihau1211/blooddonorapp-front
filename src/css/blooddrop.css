@@ -1,9 +1,10 @@
-.tearDobry {
-  width: 200px;
-  height: 200px;
+.blood-drop {
+  width: 150px;
+  height: 150px;
   border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
   border: 3px solid black;
   transform: rotate(-45deg);
-  margin-top: 20px;
+  /* margin-top: 20vh; */
   background: linear-gradient(45deg, red 20%, transparent 0);
+  display: flex;
 }

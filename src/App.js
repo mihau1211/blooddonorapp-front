@@ -7,16 +7,20 @@ import DonationForm from './forms/DonationForm';
 import ForgotPassword from './forms/ForgotPassword';
 import { Container } from 'react-bootstrap';
 import TitleBar from './bars/TitleBar';
+import HomePage from './pages/HomePage';
+import BloodDropBar from './bars/BloodDropBar';
 
 class App extends React.Component {
   render() {
     return (
-      <Container className="App">
-        <LoginForm></LoginForm>
+      <Container className='App'>
+        {/* <LoginForm></LoginForm> */}
         {/* <RegisterForm></RegisterForm> */}
         {/* <DonationForm></DonationForm> */}
         {/* <ForgotPassword></ForgotPassword> */}
         {/* <TitleBar></TitleBar> */}
+        <HomePage></HomePage>
+        {/* <BloodDropBar></BloodDropBar> */}
       </Container>
     );
   }
