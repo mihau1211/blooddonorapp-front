@@ -1,25 +1,16 @@
-.title-bar{
-    background-color: rgb(138, 123, 123);
+/* .title-bar{
+    background-color: rgb(116, 116, 116);
     width: 100vw;
     height: 10vh;
     display: flex;
     align-items: center;
     border-bottom: 2px groove white ;
-}
-
+} */
+/* 
 .side-bar {
-    background-color: rgb(138, 123, 123);
-    width: 13vw;
+    background-color: rgb(116, 116, 116);
     height: 90vh;
     display: table-row;
     align-items: center;
     float: left;
-}
-
-.blood-bar {
-    background-color: rgb(138, 123, 123);
-    width: 13vw;
-    height: 90vh;
-    display: block;
-    align-items: center;
-}
+} */

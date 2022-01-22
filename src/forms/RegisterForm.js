@@ -2,14 +2,44 @@ import React from "react";
 import "../css/forms.css";
 import { Form, Button, FloatingLabel, Row, Col, Container } from 'react-bootstrap';
 
+const col = {
+    marginLeft: "1vw",
+    marginRight: "1vw",
+}
+
+// const date = props => {
+//     var date = Date.now();
+//     var stringDate = 
+// }
+
+
+
 class RegisterForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.setDate = this.setDate.bind(this);
+    }
+
+    handleChange(event){
+        console.log(event.target.value)
+    }
+
+    setDate(){
+        var date = new Date();
+        console.log(date.getDate()+"/"+date.getMonth()+1+"/"+(date.getYear()+1900));
+        var stringDate = date.getDate()+"/"+date.getMonth()+1+"/"+(date.getYear()+1900);
+        return stringDate;
+    }
+
+
     render() {
         return (
             <div className="register-form">
                 <Form.Label className="form-title">Registration</Form.Label>
 
                 <Row>
-                    <Col>
+                    <Col style={col}>
                         <Form.Label>Acoount details</Form.Label>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -29,7 +59,7 @@ class RegisterForm extends React.Component {
                             </Form.Group>
                         </Form>
                     </Col>
-                    <Col>
+                    <Col style={col}>
                         <Form.Label>Donor info</Form.Label>
                         <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -40,7 +70,7 @@ class RegisterForm extends React.Component {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Select birth date</Form.Label>
-                                <Form.Control type="date" name="dob" placeholder="Date of Birth" />
+                                <Form.Control type="date" name="dob" placeholder="Date of Birth" onChange={this.handleChange} defaultValue={this.setDate}/>
                             </Form.Group>
                         </Form>
                         <FloatingLabel controlId="floatingSelect" >
@@ -84,7 +114,7 @@ class RegisterForm extends React.Component {
                         </FloatingLabel>
                     </Col>
                 </Row>
-                <Button>
+                <Button onClick={this.setDate}>
                     Confirm
                 </Button>
             </div>

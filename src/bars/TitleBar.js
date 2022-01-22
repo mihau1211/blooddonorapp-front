@@ -3,6 +3,19 @@ import { Container, Row, Col, Form, Button, Nav } from "react-bootstrap";
 import "../css/bars.css"
 import { BiHome } from 'react-icons/bi';
 
+const mainContainer = { 
+    textAlign: "center",
+    // padding: "0px",
+    // width: "100vw",
+    height: "10vh",
+    margin: "0px",
+    padding: "0px",
+    display: "flex",
+    alignItems: "center",
+    borderBottom: "2px groove white",
+    backgroundColor: "rgb(116, 116, 116)"
+}
+
 const labelContainer = {
     marginLeft: "32vw",
     width: "18vw",
@@ -19,10 +32,9 @@ const label = {
 class TitleBar extends React.Component {
     render() {
         return (
-            // <div className="title-bar"></div>
-            <Container style={{ textAlign: "center" }} className="title-bar">
-                <Button style={{ marginLeft: "4vw" }} variant="danger" className="home-btn">
-                    <BiHome size={30}></BiHome>
+            <Container style={mainContainer}>
+                <Button style={{ marginLeft: "4vw" }} variant="danger" >
+                    <BiHome size={40}></BiHome>
                 </Button>
                 <Container style={labelContainer}>
                     <Form.Label style={label}>Blood Donor App</Form.Label>

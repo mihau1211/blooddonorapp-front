@@ -9,6 +9,9 @@ import { Container } from 'react-bootstrap';
 import TitleBar from './bars/TitleBar';
 import HomePage from './pages/HomePage';
 import BloodDropBar from './bars/BloodDropBar';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 class App extends React.Component {
   render() {
@@ -21,6 +24,9 @@ class App extends React.Component {
         {/* <TitleBar></TitleBar> */}
         <HomePage></HomePage>
         {/* <BloodDropBar></BloodDropBar> */}
+        {/* <LoginPage></LoginPage> */}
+        {/* <RegisterPage></RegisterPage> */}
+        {/* <ForgotPasswordPage></ForgotPasswordPage> */}
       </Container>
     );
   }

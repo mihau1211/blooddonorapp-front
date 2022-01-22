@@ -1,19 +1,31 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import GoogleMapsContent from "./GoogleMapsContent";
 
 const mainContainer = {
     height: "90vh",
-    width: "70vw",
+    width: "auto",
     backgroundColor: "red",
-    display: "block", 
-    float: "left"
+    itemsAlign: "center",
+    textAlign: "center"
+}
+
+const col = {
+    itemsAlign: "center"
 }
 
 class HomePageContent extends React.Component {
     render() {
-        return(
+        return (
             <Container style={mainContainer}>
-                dupa
+                <Row>
+                    <Col></Col>
+                    <Col style={col} xs={6}>
+                        <GoogleMapsContent></GoogleMapsContent>
+
+                    </Col>
+                    <Col></Col>
+                </Row>
             </Container>
         )
     }

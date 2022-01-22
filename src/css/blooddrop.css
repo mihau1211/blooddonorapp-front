@@ -1,10 +1,11 @@
 .blood-drop {
-  width: 150px;
-  height: 150px;
+  width: 8vw;
+  height: 8vw;
   border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
   border: 3px solid black;
   transform: rotate(-45deg);
-  /* margin-top: 20vh; */
-  background: linear-gradient(45deg, red 20%, transparent 0);
+  margin-top: 20vh;
+  margin-left: 2vw;
+  background: linear-gradient(45deg, red 40%, transparent 0);
   display: flex;
 }

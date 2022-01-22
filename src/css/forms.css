@@ -13,6 +13,20 @@
     width: 30vw;
 }
 
+.forgot-form {
+    margin-top: 8vh;
+}
+
 .form-title {
     font-size: 26px;
+}
+
+.fixed-div div:first-child{
+    /* height: 90vh !important;
+    width: auto !important; */
+    position: absolute !important;
+}
+
+.fixed-div {
+    position: relative !important;
 }
