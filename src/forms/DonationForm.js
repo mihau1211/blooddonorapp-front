@@ -2,10 +2,15 @@ import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import "../css/forms.css";
 
+const mainContainer = {
+    width: "30vw",
+    marginTop: "20vh"
+}
+
 class DonationForm extends React.Component {
     render() {
         return (
-            <div className="donation-form">
+            <Container style={mainContainer}>
                 <Form.Label className="form-title">Add new donation</Form.Label>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -20,7 +25,7 @@ class DonationForm extends React.Component {
                         Add donation
                     </Button>
                 </Form>
-            </div>
+            </Container>
         )
     }
 }

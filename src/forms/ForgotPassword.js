@@ -17,7 +17,7 @@ class ForgotPassword extends React.Component {
                         <Form.Control type="text" placeholder="Email" />
                     </Form.Group>
                     <Button style={button} variant="primary" type="submit">
-                        Add donation
+                        Confirm
                     </Button>
                 </Form>
             </div>

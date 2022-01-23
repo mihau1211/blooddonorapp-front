@@ -22,11 +22,12 @@
 }
 
 .fixed-div div:first-child{
-    /* height: 90vh !important;
-    width: auto !important; */
+    width: 100% !important;
     position: absolute !important;
 }
 
 .fixed-div {
     position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
 }

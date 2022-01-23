@@ -15,15 +15,18 @@ const locationLabel = {
     marginTop: "5vh"
 }
 
-class HomePageContent extends React.Component {
+class MapsContent extends React.Component {
     render() {
         return (
             <Container style={mainContainer}>
                 <Row style={{height:"15vh"}}>
+                    <Form.Label style={locationLabel}>Nearest Blood Donation Center location</Form.Label>
                 </Row>
                 <Row >
                     <Col ></Col>
-                    <Col xs={7}>
+                    <Col xs={9}>
+                        <GoogleMapsContent></GoogleMapsContent>
+
                     </Col>
                     <Col ></Col>
                 </Row>
@@ -32,4 +35,4 @@ class HomePageContent extends React.Component {
     }
 }
 
-export default HomePageContent;
+export default MapsContent;

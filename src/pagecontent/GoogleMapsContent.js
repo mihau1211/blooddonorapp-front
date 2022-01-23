@@ -1,10 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 const mainContainer = {
     height: "90vh",
-    width: "auto",
+    // width: "auto",
     display: "inline-block",
     alignItems: "center",
     float: "left",
@@ -13,13 +13,18 @@ const mainContainer = {
 const mapStyles = {
     width: '35vw',
     height: '35vw',
-    // display: "flex"
+    position: "relative !important"
 }
 
 const contentContainer = {
     width: "35vw",
     height: "35vw",
     itemsAlign: "center"
+}
+
+const position = {
+    lat: 51.94059093479898,
+    lng: 15.518916699577375
 }
 
 class GoogleMapsContent extends React.Component {
@@ -30,15 +35,12 @@ class GoogleMapsContent extends React.Component {
                     <Map
                         resetBoundsOnResize={true}
                         google={this.props.google}
-                        zoom={14}
+                        zoom={13}
                         style={mapStyles}
-                        initialCenter={
-                            {
-                                lat: 51.935619,
-                                lng: 15.506186
-                            }
-                        }
-                    />
+                        initialCenter={position}
+                    >
+                        <Marker position={position}/>
+                    </Map>
                 </Container>
             </Container>
         )

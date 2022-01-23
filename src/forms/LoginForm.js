@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Button, Nav, Container } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 
 const button = {
     marginRight: "1vw",
@@ -7,6 +8,16 @@ const button = {
 }
 
 class LoginForm extends React.Component {
+    constructor(props) {
+        super(props);
+        
+    }
+
+    redirectRegister = () => {
+        const { history } = this.props;
+        if(history) history.push('/register');
+    }
+
     render() {
         return (
             <div className="login-form">
@@ -29,7 +40,7 @@ class LoginForm extends React.Component {
                     <Button style={button} variant="primary" type="submit">
                         Sign In
                     </Button>
-                    <Button style={button} variant="primary" type="submit">
+                    <Button style={button} onClick={this.redirectRegister} variant="primary" type="button">
                         Sign Up
                     </Button>
                 </Form>
@@ -38,4 +49,4 @@ class LoginForm extends React.Component {
     }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

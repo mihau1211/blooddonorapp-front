@@ -1,44 +1,30 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Stack } from "react-bootstrap";
 import BloodDropBar from "../bars/BloodDropBar";
 import SideBar from "../bars/SideBar";
 import TitleBar from "../bars/TitleBar";
-import HomePageContent from "../pagecontent/HomePageContent";
+import DonationForm from "../forms/DonationForm";
+import MapsContent from "../pagecontent/MapsContent";
 
 const mainContainer = {
     height: "100vh",
     width: "100vw",
-    // maxWidth: "100vw",
-    // padding: "0px"
-    // backgroundColor: "red"
+    backgroundColor: "silver"
 }
 
 const titleRow = {
     width: "100vw",
     padding: "0px !important",
-    // flex: "0 0",
     margin: "0px",
     "--bs-gutter-x": "0"
-    // backgroundColor: "red",
 }
 
 const contentRow = {
-    // width: "100vw",
     padding: "0px",
-    // flex: "1 0",
     margin: "0px"
 }
 
-const col = {
-    // width: "100vw",
-    // padding: "0px",
-    // flex: "1 0",
-    // margin: "0px",
-    // backgroundColor: "grey",
-    // border: "1px solid black"
-}
-
-class HomePage extends React.Component {
+class DonationPage extends React.Component {
     render() {
         return (
             <Container style={mainContainer}>
@@ -48,13 +34,13 @@ class HomePage extends React.Component {
                     </Col>
                 </Row>
                 <Row style={contentRow}>
-                    <Col style={col}>
+                    <Col >
                         <SideBar></SideBar>
                     </Col>
-                    <Col style={col} xs={9}>
-                        <HomePageContent></HomePageContent>
+                    <Col xs={9}>
+                        <DonationForm></DonationForm>
                     </Col>
-                    <Col style={col}>
+                    <Col >
                         <BloodDropBar></BloodDropBar>
                     </Col>
                 </Row>
@@ -64,4 +50,4 @@ class HomePage extends React.Component {
     }
 }
 
-export default HomePage;
+export default DonationPage;

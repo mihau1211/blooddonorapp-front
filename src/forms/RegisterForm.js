@@ -7,13 +7,6 @@ const col = {
     marginRight: "1vw",
 }
 
-// const date = props => {
-//     var date = Date.now();
-//     var stringDate = 
-// }
-
-
-
 class RegisterForm extends React.Component {
     constructor(props) {
         super(props);
