@@ -6,6 +6,6 @@
   transform: rotate(-45deg);
   margin-top: 20vh;
   margin-left: 2vw;
-  background: linear-gradient(45deg, red 40%, transparent 0);
+  background: linear-gradient(45deg, red 60%, transparent 0);
   display: flex;
 }

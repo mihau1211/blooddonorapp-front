@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Container, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import "../css/bars.css"
+import "../css/bars.css";
+import { withRouter } from 'react-router-dom';
 import { BiDonateBlood, BiHistory, BiMap, BiInfoCircle, BiLogOut } from 'react-icons/bi';
 
 const mainContainer = {
-    // width: "15vw",
     textAlign: "center",
     padding: "0px",
     backgroundColor: "rgb(116, 116, 116)",
@@ -45,21 +45,41 @@ const renderLogoutToolyip = props => (
 );
 
 class SideBar extends React.Component {
+    constructor(props) {
+        super(props);
+        
+    }
+    
+    redirectDonate = () => {
+        const { history } = this.props;
+        if(history) history.push('/donor/donation');
+    }
+
+    redirectHistory = () => {
+        const { history } = this.props;
+        if(history) history.push('/donor/history');
+    }
+
+    redirectLocation = () => {
+        const { history } = this.props;
+        if(history) history.push('/donor/location');
+    }
+
     render() {
         return (
             <Container style={mainContainer}>
                 <OverlayTrigger overlay={renderDonationTooltip}>
-                    <Button style={buttons} variant='danger'>
+                    <Button style={buttons} variant='danger' onClick={this.redirectDonate}>
                         <BiDonateBlood size={buttonSize}></BiDonateBlood>
                     </Button>
                 </OverlayTrigger>
                 <OverlayTrigger overlay={renderHistoryTooltip}>
-                    <Button style={buttons} variant='danger'>
+                    <Button style={buttons} variant='danger' onClick={this.redirectHistory}>
                         <BiHistory size={buttonSize}></BiHistory>
                     </Button>
                 </OverlayTrigger>
                 <OverlayTrigger overlay={renderLocalizationTooltip}>
-                    <Button style={buttons} variant='danger'>
+                    <Button style={buttons} variant='danger' onClick={this.redirectLocation}>
                         <BiMap size={buttonSize}></BiMap>
                     </Button>
                 </OverlayTrigger>
@@ -78,4 +98,4 @@ class SideBar extends React.Component {
     }
 }
 
-export default SideBar;
+export default withRouter(SideBar);

@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button, Nav } from "react-bootstrap";
 import "../css/bars.css"
 import { BiHome } from 'react-icons/bi';
 
-const mainContainer = { 
+const mainContainer = {
     textAlign: "center",
     // padding: "0px",
     // width: "100vw",

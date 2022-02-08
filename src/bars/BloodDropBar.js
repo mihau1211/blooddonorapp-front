@@ -41,7 +41,7 @@ const button = {
 }
 
 const renderGoalUpdate = props => (
-    <Tooltip {...props}>Click here to update your donation.</Tooltip>
+    <Tooltip {...props}>Click here to update your donation goal.</Tooltip>
 );
 
 class BloodDropBar extends React.Component {

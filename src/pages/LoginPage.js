@@ -23,12 +23,37 @@ const form = {
     backgroundColor: "white",
 }
 
+let counter = 0;
+
 class LoginPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLogged: false,
+            user: []
+        }
+    }
+
+    handleCallback = (childData) => {
+        this.setState({
+            user: childData.user,
+            isLogged: childData.isLogged
+        })
+    }
+
+    componentDidUpdate() {
+        if (counter === 0) {
+            counter = counter + 1;
+            // console.log(this.state.user)
+            this.props.loginCallback(this.state)
+        }
+    }
+
     render() {
         return (
             <Container style={mainContainer}>
                 <Container style={form}>
-                    <LoginForm></LoginForm>
+                    <LoginForm handleCallback={this.handleCallback}></LoginForm>
                 </Container>
             </Container>
         )

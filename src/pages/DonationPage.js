@@ -25,6 +25,34 @@ const contentRow = {
 }
 
 class DonationPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: [],
+            isLogged: false
+        }
+    }
+
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve)
+        })
+    }
+
+    async componentDidMount() {
+        await this.setStateAsync({ user: this.props.data.user, isLogged: this.props.data.isLogged })
+        // this.setState({
+        //     user: this.props.data.user,
+        //     isLogged: this.props.data.isLogged
+        // })
+        // console.log(this.state.user)
+    }
+
+    // async componentDidUpdate(prevProps) {
+    //     if (this.props.data.user !== prevProps.data.user)
+    //         await this.setStateAsync({ user: this.props.data.user })
+    // }
+
     render() {
         return (
             <Container style={mainContainer}>
@@ -38,7 +66,7 @@ class DonationPage extends React.Component {
                         <SideBar></SideBar>
                     </Col>
                     <Col xs={9}>
-                        <DonationForm></DonationForm>
+                        <DonationForm user={this.state.user}></DonationForm>
                     </Col>
                     <Col >
                         <BloodDropBar></BloodDropBar>

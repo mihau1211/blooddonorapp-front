@@ -12,33 +12,48 @@ import MapsPage from './pages/MapsPage'
 import HomePage from './pages/HomePage'
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLogged: false,
+      user: []
+    }
+  }
+
+  setStateAsync(state) {
+    return new Promise((resolve) => {
+      this.setState(state, resolve)
+    })
+  }
+
+  loginCallback = async (childData) => {
+    await this.setStateAsync({ data: childData })
+  }
+
   render() {
     return (
       <Container className='App'>
         <Router>
           <Switch>
-            <Route exact path='/' component={LoginPage}></Route>
+            <Route exact path='/' render={(props) => (
+              <LoginPage {...props} loginCallback={this.loginCallback} />)}>
+            </Route>
             <Route exact path='/register' component={RegisterPage}></Route>
             <Route exact path='/forgotPassword' component={ForgotPasswordPage}></Route>
-            <Route exact path='/donor' component={HomePage}></Route>
-            <Route exact path='/donor/history' component={HistoryPage}></Route>
-            <Route exact path='/donor/donation' component={DonationPage}></Route>
+            <Route exact path='/donor' render={(props) => (
+              <HomePage {...props} data={this.state.data} />
+            )}></Route>
+            <Route exact path='/donor/history' render={(props) => (
+              <HistoryPage {...props} data={this.state.data} />
+            )}></Route>
+            <Route exact path='/donor/donation' render={(props) => (
+              <DonationPage {...props} data={this.state.data} />
+            )}></Route>
             <Route exact path='/donor/location' component={MapsPage}></Route>
           </Switch>
         </Router>
-        {/* <MapsPage></MapsPage> */}
-        {/* <DonationPage></DonationPage> */}
-        {/* <ForgotPasswordPage></ForgotPasswordPage> */}
-        {/* <LoginPage></LoginPage> */}
-        {/* <RegisterPage></RegisterPage> */}
-        {/* <HistoryPage></HistoryPage> */}
-      </Container>
-      // <Router>
-      //   <Switch>
-      //     <Route exact path='/' component={LoginPage}>
-      //     </Route>
-      //   </Switch>
-      // </Router>
+      </Container >
     );
   }
 }

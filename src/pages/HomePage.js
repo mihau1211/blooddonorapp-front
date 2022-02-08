@@ -39,6 +39,24 @@ const col = {
 }
 
 class HomePage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve)
+        })
+    }
+    
+    async componentDidMount() {
+        await this.setStateAsync({ user: this.props.data.user, isLogged: this.props.data.isLogged })
+        console.log(this.state.user)
+    }
+
     render() {
         return (
             <Container style={mainContainer}>
@@ -52,7 +70,7 @@ class HomePage extends React.Component {
                         <SideBar></SideBar>
                     </Col>
                     <Col style={col} xs={9}>
-                        <HomePageContent></HomePageContent>
+                        <HomePageContent user={this.state.user}></HomePageContent>
                     </Col>
                     <Col style={col}>
                         <BloodDropBar></BloodDropBar>
