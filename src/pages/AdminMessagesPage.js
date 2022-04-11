@@ -1,9 +1,8 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import BloodDropBar from "../bars/BloodDropBar";
-import SideBar from "../bars/SideBar";
-import TitleBar from "../bars/TitleBar";
-import HomePageContent from "../pagecontent/HomePageContent";
+import AdminSideBar from "../bars/AdminSideBar";
+import AdminMessagesContent from "../pagecontent/AdminMessagesContent";
+import AdminTitleBar from "../bars/AdminTitleBar";
 
 const mainContainer = {
     height: "100vh",
@@ -38,7 +37,7 @@ const col = {
     // border: "1px solid black"
 }
 
-class HomePage extends React.Component {
+class AdminMessagePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -46,34 +45,23 @@ class HomePage extends React.Component {
         }
     }
 
-    // setStateAsync(state) {
-    //     return new Promise((resolve) => {
-    //         this.setState(state, resolve)
-    //     })
-    // }
-    
-    // async componentDidMount() {
-    //     await this.setStateAsync({ user: this.props.data.user, isLogged: this.props.data.isLogged })
-    //     console.log(this.state.user)
-    // }
-
     render() {
         return (
             <Container style={mainContainer}>
                 <Row style={titleRow}>
                     <Col>
-                        <TitleBar></TitleBar>
+                        <AdminTitleBar></AdminTitleBar>
                     </Col>
                 </Row>
                 <Row style={contentRow}>
                     <Col style={col}>
-                        <SideBar></SideBar>
+                        <AdminSideBar></AdminSideBar>
                     </Col>
                     <Col style={col} xs={9}>
-                        <HomePageContent user={this.props.data.user}></HomePageContent>
+                        <AdminMessagesContent user={this.props.data.user}></AdminMessagesContent>
                     </Col>
                     <Col style={col}>
-                        <BloodDropBar user={this.props.data.user}></BloodDropBar>
+                        
                     </Col>
                 </Row>
             </Container>
@@ -82,4 +70,4 @@ class HomePage extends React.Component {
     }
 }
 
-export default HomePage;
+export default AdminMessagePage;

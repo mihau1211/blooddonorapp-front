@@ -1,10 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { geolocated } from "react-geolocated";
 
 const mainContainer = {
     height: "90vh",
-    // width: "auto",
     display: "inline-block",
     alignItems: "center",
     float: "left",
@@ -28,6 +28,17 @@ const position = {
 }
 
 class GoogleMapsContent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            position: false
+        }
+    }
+
+    componentDidMount(){
+        console.log(this.props)
+    }
+
     render() {
         return (
             <Container style={mainContainer} className="fixed-div">
@@ -35,11 +46,17 @@ class GoogleMapsContent extends React.Component {
                     <Map
                         resetBoundsOnResize={true}
                         google={this.props.google}
-                        zoom={13}
+                        zoom={15}
                         style={mapStyles}
-                        initialCenter={position}
+                        initialCenter={{
+                            lat: this.props.bloodBank.latitude,
+                            lng: this.props.bloodBank.longitude
+                        }}
                     >
-                        <Marker position={position}/>
+                        <Marker position={{
+                            lat: this.props.bloodBank.latitude,
+                            lng: this.props.bloodBank.longitude
+                        }} />
                     </Map>
                 </Container>
             </Container>

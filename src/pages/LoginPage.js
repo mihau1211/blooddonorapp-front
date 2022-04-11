@@ -13,7 +13,7 @@ const mainContainer = {
 }
 
 const form = {
-    height: "38vh",
+    height: "42vh",
     width: "35vw",
     marginTop: "25vh",
     alignItems: "stretch",
@@ -44,7 +44,6 @@ class LoginPage extends React.Component {
     componentDidUpdate() {
         if (counter === 0) {
             counter = counter + 1;
-            // console.log(this.state.user)
             this.props.loginCallback(this.state)
         }
     }

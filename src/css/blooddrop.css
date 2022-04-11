@@ -9,3 +9,18 @@
   background: linear-gradient(45deg, red 60%, transparent 0);
   display: flex;
 }
+
+/* .progress {
+  width: 8vw;
+  height: 8vw;
+  border-radius: 80% 0 55% 50% / 55% 0 80% 50%;
+  border: 3px solid black;
+  transform: rotate(-45deg);
+  margin-top: 20vh;
+  margin-left: 2vw;
+  display: flex;
+  overflow: hidden;
+  font-size: .75rem;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+} */

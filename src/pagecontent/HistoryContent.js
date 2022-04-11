@@ -1,14 +1,16 @@
 import React from "react";
-import { Button, Col, Container, Form, Row, Spinner, Table } from "react-bootstrap";
+import { FloatingLabel, Button, Col, Container, Row, Spinner } from "react-bootstrap";
+import BootstrapTable from "react-bootstrap-table-next";
 import GoogleMapsContent from "./GoogleMapsContent";
 import axios from 'axios';
+import '../css/tableStyle.css'
 
 const mainContainerLoad = {
     height: "30vh",
     width: "50vw",
     itemsAlign: "center",
     textAlign: "center",
-    marginTop: "15vh",
+    marginTop: "15vh"
 
 }
 
@@ -17,7 +19,7 @@ const mainContainerData = {
     width: "50vw",
     itemsAlign: "center",
     textAlign: "center",
-    marginTop: "15vh",
+    marginTop: "10vh",
 
 }
 
@@ -28,42 +30,99 @@ const tableStyle = {
     height: "50vh",
     width: "50vw",
     itemsAlign: "center",
-    textAlign: "center",
-    // marginTop: "15vh"
+    textAlign: "center"
 }
 
+const userInfoLabel = {
+    fontSize: "26px",
+    fontWeight: "bold"
+}
+
+const columns = [
+    {
+        dataField: "donationDate",
+        text: "Data donacji",
+        sort: true
+    },
+    {
+        dataField: "quantity",
+        text: "Objętość [ml]"
+    },
+    {
+        dataField: "donationCenter",
+        text: "RCKiK"
+    }]
+
 class HistoryContent extends React.Component {
-    state = {
-        donations: [],
-        bloodbank: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            donations: [],
+            bloodbanks: [],
+            data: [],
+            donor: []
+        }
+    }
+
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve)
+        })
+    }
+
+    async prepareData(i) {
+        let donationCenter = '';
+        for (let j=0; j<this.state.bloodbanks.length; j++) {
+            if(this.state.donations[i].bloodBankId === this.state.bloodbanks[j].bloodBankId){
+                donationCenter = this.state.bloodbanks[j].donationCenter
+            }
+        }
+        let data = [...this.state.data, {
+            id: i + 1,
+            donationDate: this.state.donations[i].donationDate.slice(0, -19),
+            quantity: this.state.donations[i].quantity,
+            donationCenter: donationCenter
+        }]
+        await this.setStateAsync({ data });
     }
 
     refreshPage() {
         window.location.reload(false);
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:8080/donation/donor/2')
-            .then(res => {
+    async componentDidMount() {
+        await axios.get('http://localhost:8080/donor/' + this.props.user.donorId)
+            .then(async res => {
+                const donor = res.data;
+                await this.setStateAsync({ donor });
+            }).catch(function (error) {
+                console.log(error)
+                this.setState({ donor: [] });
+            })
+
+        await axios.get('http://localhost:8080/donation/donor/' + this.props.user.donorId)
+            .then(async res => {
                 const donations = res.data;
-                this.setState({ donations });
-                // console.log(donations)
+                await this.setStateAsync({ donations });
             }).catch(function (error) {
-                // console.log(error)
-                this.setState({ donations: [] });
+                console.log(error)
+                this.setStateAsync({ donations: [] });
             })
 
 
 
-        axios.get('http://localhost:8080/bloodBank/1')
-            .then(res => {
-                const bloodbank = res.data;
-                this.setState({ bloodbank });
-                // console.log(bloodbank)
+        await axios.get('http://localhost:8080/bloodBank')
+            .then(async res => {
+                const bloodbanks = res.data;
+                await this.setStateAsync({ bloodbanks });
             }).catch(function (error) {
-                // console.log(error)
-                this.setState({ bloodbank: [] });
+                console.log(error)
+                this.setStateAsync({ bloodbanks: [] });
             })
+
+        for (let i = 0; i < this.state.donations.length; i++) {
+            await this.prepareData(i);
+        }
     }
 
     render() {
@@ -76,7 +135,7 @@ class HistoryContent extends React.Component {
                             <Col></Col>
                             <Col></Col>
                             <Col>
-                                <Button style={{marginTop: "5vh"}} variant="danger" onClick={this.refreshPage}>Reload</Button>
+                                <Button style={{ marginTop: "5vh" }} variant="danger" onClick={this.refreshPage}>Reload</Button>
                             </Col>
                         </Row>
                     </Container>
@@ -84,68 +143,28 @@ class HistoryContent extends React.Component {
             } else {
                 return (
                     <Container style={mainContainerData}>
-                        <Container style={tableStyle}>
-                            <Table responsive variant="danger" striped bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Donation date</th>
-                                        <th>Quantity [ml]</th>
-                                        <th>Donation center</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {this.state.donations.map((item) => {
-                                        return (
-                                            <tr>
-                                                <td>{item.donationId}</td>
-                                                <td>{item.donationDate}</td>
-                                                <td>{item.quantity}</td>
-                                                <td>{this.state.bloodbank.donationCenter}</td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </Table>
-                        </Container>
-                        <Row style={{marginTop: "5vh"}}>
-                            <Col></Col>
+                        <Row style={{ marginTop: "5vh" }}>
                             <Col></Col>
                             <Col>
-                                <Button style={{ width: "" }} variant="danger" onClick={this.refreshPage}>Reload</Button>
+                                <FloatingLabel style={userInfoLabel}>Witaj {this.state.donor.name}, oddałeś krew już {this.state.donor.donations.length} razy! </FloatingLabel>
                             </Col>
+                            <Col></Col>
                         </Row>
+                        <Container style={tableStyle}>
+                            <BootstrapTable
+                                keyField="id"
+                                data={this.state.data}
+                                columns={columns}
+                                striped
+                                hover
+                                condensed
+                                variant="dark"
+                            />
+                        </Container>
                     </Container>
                 )
             }
         }
-
-        // return (
-        //     <Container style={mainContainer}>
-        //         <Table responsive variant="danger" striped bordered hover size="sm">
-        //             <thead>
-        //                 <tr>
-        //                     <th>#</th>
-        //                     <th>Donation date</th>
-        //                     <th>Quantity [ml]</th>
-        //                     <th>Donation center</th>
-        //                 </tr>
-        //             </thead>
-        //             <tbody>
-        //                 {this.state.donations.map((item) => {
-        //                     return (
-        //                         <tr>
-        //                             <td>{item.donationId}</td>
-        //                             <td>{item.donationDate}</td>
-        //                             <td>{item.quantity}</td>
-        //                             <td>{this.state.bloodbank.donationCenter}</td>
-        //                         </tr>
-        //                     )
-        //                 })}
-        //             </tbody>
-        //         </Table>
-        //     </Container>
-        // )
     }
 }
 

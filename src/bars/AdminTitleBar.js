@@ -33,7 +33,7 @@ const titleRow = {
     "--bs-gutter-x": "0"
 }
 
-class TitleBar extends React.Component {
+class AdminTitleBar extends React.Component {
     constructor(props) {
         super(props);
 
@@ -42,7 +42,7 @@ class TitleBar extends React.Component {
     redirectHome = () => {
         const { history } = this.props;
         if (history) {
-            history.push('/donor');
+            history.push('/bloodbank');
         }
     }
 
@@ -59,4 +59,4 @@ class TitleBar extends React.Component {
     }
 }
 
-export default withRouter(TitleBar);
+export default withRouter(AdminTitleBar);

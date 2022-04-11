@@ -1,11 +1,9 @@
 import React from "react";
-import { Col, Container, Row, Stack } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import BloodDropBar from "../bars/BloodDropBar";
+import InformationContent from '../pagecontent/InformationContent'
 import SideBar from "../bars/SideBar";
 import TitleBar from "../bars/TitleBar";
-import DonationForm from "../forms/DonationForm";
-import HistoryContent from "../pagecontent/HistoryContent";
-import MapsContent from "../pagecontent/MapsContent";
 
 const mainContainer = {
     height: "100vh",
@@ -23,19 +21,14 @@ const titleRow = {
 const contentRow = {
     padding: "0px",
     margin: "0px"
-} 
+}
 
-
-class HistoryPage extends React.Component {
+class InformationPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            
         }
-    }
-
-    componentDidMount(){
-        // console.log(this.props)
     }
 
     render() {
@@ -51,16 +44,15 @@ class HistoryPage extends React.Component {
                         <SideBar></SideBar>
                     </Col>
                     <Col xs={9}>
-                        <HistoryContent user={this.props.data.user}></HistoryContent>
+                        <InformationContent></InformationContent>
                     </Col>
                     <Col >
                         <BloodDropBar user={this.props.data.user}></BloodDropBar>
                     </Col>
                 </Row>
             </Container>
-
         )
     }
 }
 
-export default HistoryPage;
+export default InformationPage;

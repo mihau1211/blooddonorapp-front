@@ -1,0 +1,65 @@
+import React from "react";
+import { Button, Container, Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import "../css/bars.css";
+import { withRouter } from 'react-router-dom';
+import { BiHome, BiLogOut, BiMailSend } from 'react-icons/bi';
+
+const mainContainer = {
+    textAlign: "center",
+    padding: "0px",
+    backgroundColor: "rgb(116, 116, 116)",
+    height: "90vh",
+    display: "table-row",
+    alignItems: "center",
+    float: "left",
+    borderRadius: "0px 0px 25px 0px"
+}
+
+const buttons = {
+
+    display: "flex",
+    marginTop: "5vh",
+    marginLeft: "4vw"
+}
+
+const buttonSize = 40;
+
+class SideBar extends React.Component {
+    constructor(props) {
+        super(props);
+        
+    }
+
+    redirectHome = () => {
+        const { history } = this.props;
+        if (history) history.push('/bloodbank')
+    }
+
+    redirectMessages = () => {
+        const { history } = this.props;
+        if(history) history.push('/bloodbank/messages');
+    }
+
+    redirectLogout = () => {
+        const { history } = this.props;
+        if(history) history.push('/');
+    }
+
+    render() {
+        return (
+            <Container style={mainContainer}>
+                    <Button style={buttons} variant='danger' onClick={this.redirectHome}>
+                        <BiHome size={buttonSize}></BiHome>
+                    </Button>
+                    <Button style={buttons} variant='danger' onClick={this.redirectMessages}>
+                        <BiMailSend size={buttonSize}></BiMailSend>
+                    </Button>
+                    <Button style={buttons} variant='danger'>
+                        <BiLogOut size={buttonSize} onClick={this.redirectLogout}></BiLogOut>
+                    </Button>
+            </Container>
+        )
+    }
+}
+
+export default withRouter(SideBar);

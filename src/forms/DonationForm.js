@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Container, Form, Button, Modal } from "react-bootstrap";
+import { Dropdown, Container, Form, Button, Modal, DropdownButton } from "react-bootstrap";
 import "../css/forms.css";
 
 const mainContainer = {
@@ -12,7 +12,12 @@ class DonationForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: [],
+            donor: [],
+            bloodBanks: [],
+            choosedBank: {
+                id: 0,
+                name: 'Wybierz'
+            },
             quantity: 450,
             popup: false
         }
@@ -22,13 +27,6 @@ class DonationForm extends React.Component {
         return new Promise((resolve) => {
             this.setState(state, resolve)
         })
-    }
-
-    async componentDidUpdate(prevProps) {
-        if (this.props.user !== prevProps.user) {
-            await this.setStateAsync({ user: this.props.user })
-            console.log(this.state.user.donorId)
-        }
     }
 
     quantityChange = e => {
@@ -43,25 +41,35 @@ class DonationForm extends React.Component {
         this.setState({ popup: false })
     }
 
-    addDonation = async () => {
-        console.log(this.state.user.donorId)
-        let url = 'http://localhost:8080/donor/';
-        await axios.get(url.concat(this.state.user.donorId))
-            .then(res => {
+    async getDonor() {
+        await axios.get('http://localhost:8080/donor/' + this.props.user.donorId)
+            .then(async res => {
                 const donor = res.data;
-                console.log(donor)
-                this.setState({ donor: donor })
+                await this.setStateAsync({ donor });
+            }).catch(function (error) {
+                console.log(error)
             })
+    }
 
+    async getBloodBanks() {
+        await axios.get('http://localhost:8080/bloodBank/')
+            .then(async res => {
+                const bloodBanks = res.data;
+                await this.setStateAsync({ bloodBanks })
+            }).catch((err) => {
+                return err;
+            });
+    }
+
+    addDonation = async () => {
+        await this.getDonor();
         const donationData = {
             donorId: this.state.donor.donorId,
-            bloodBankId: this.state.donor.bloodBankId,
+            bloodBankId: this.state.choosedBank.id,
             donationDate: this.state.date,
             bloodType: this.state.donor.bloodType,
             quantity: this.state.quantity
         }
-
-        console.log(donationData)
 
         await axios({
             method: 'POST',
@@ -76,31 +84,58 @@ class DonationForm extends React.Component {
         });
     }
 
+    handleDropdownClick = async (e) => {
+        this.setStateAsync({
+            choosedBank: {
+                id: e.target.id,
+                name: e.target.text
+            }
+        })
+    }
+
+    async componentDidMount() {
+        await this.getBloodBanks()
+    }
+
     render() {
         return (
             <Container style={mainContainer}>
-                <Form.Label className="form-title">Add new donation</Form.Label>
+                <Form.Label className="form-title">Dodaj nową donację</Form.Label>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Select birth date</Form.Label>
-                        <Form.Control type="date" name="dob" placeholder="Date of Birth" onChange={this.dateChange} defaultValue={"01/01/2000"}/>
+                        <Form.Label>Miejsce donacji</Form.Label>
+                        <DropdownButton variant="danger" title={this.state.choosedBank.name}>
+                            {this.state.bloodBanks.map((bank, index) => {
+                                return <Dropdown.Item
+                                    key={bank.bloodBankId}
+                                    id={bank.bloodBankId}
+                                    onClick={this.handleDropdownClick}
+                                >
+                                    {bank.donationCenter}
+                                </Dropdown.Item>
+                            })}
+                        </DropdownButton>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Data donacji</Form.Label>
+                        <Form.Control type="date" name="dob" onChange={this.dateChange} defaultValue={"01/01/2000"} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Quantity of donation</Form.Label>
+                        <Form.Label>Objętość donacji</Form.Label>
                         <Form.Control type="number" placeholder="Quantity" min={300} max={500} defaultValue={450} onChange={this.quantityChange} />
                     </Form.Group>
-                    <Button variant="primary" type="button" onClick={this.addDonation}>
-                        Add donation
+                    <Button variant="danger" type="button" onClick={this.addDonation}>
+                        Dodaj donację
                     </Button>
                 </Form>
                 <Modal
                     show={this.state.popup}
-                    // onHide={this.closePopup}
+                    onHide={this.closePopup}
                     backdrop="static"
                     keyboard={false}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title>Your donation was succesfully added.</Modal.Title>
+                        <Modal.Title>Udało się dodać donację.</Modal.Title>
                     </Modal.Header>
                     <Modal.Footer>
                         <Button variant="danger" onClick={this.closePopup}>Close</Button>

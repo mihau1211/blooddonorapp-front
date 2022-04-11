@@ -36,10 +36,10 @@ class MapsPage extends React.Component {
                         <SideBar></SideBar>
                     </Col>
                     <Col  xs={9}>
-                        <MapsContent></MapsContent>
+                        <MapsContent data={this.props.data}></MapsContent>
                     </Col>
                     <Col >
-                        <BloodDropBar></BloodDropBar>
+                        <BloodDropBar user={this.props.data.user}></BloodDropBar>
                     </Col>
                 </Row>
             </Container>

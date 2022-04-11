@@ -45,7 +45,7 @@ class LoginForm extends React.Component {
         }).then((res) => {
             if (res.data != "") {
                 this.setState({ user: res.data })
-                if (res.data.userRole === "DONOR") {
+                if (res.data.userRole === "DONOR" || res.data.userRole === "BLOODBANK") {
                     this.setState({ isLogged: true })
                 }
             }
@@ -56,13 +56,20 @@ class LoginForm extends React.Component {
 
     redirectLogin = () => {
         const { history } = this.props;
-        if(history && this.state.isLogged) history.push('/donor');
+        if(history && this.state.isLogged) {
+            if(this.state.user.userRole === "DONOR"){
+                history.push('/donor');
+            } else if(this.state.user.userRole === "BLOODBANK") {
+                history.push('/bloodbank');
+            }
+        } 
     }
 
     loginSubmit = async event => {
         event.preventDefault();
         await this.loginFunction();
         this.props.handleCallback(this.state);
+        console.log(this.state.isLogged)
         this.redirectLogin()
     }
 

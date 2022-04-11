@@ -41,17 +41,7 @@ class DonationPage extends React.Component {
 
     async componentDidMount() {
         await this.setStateAsync({ user: this.props.data.user, isLogged: this.props.data.isLogged })
-        // this.setState({
-        //     user: this.props.data.user,
-        //     isLogged: this.props.data.isLogged
-        // })
-        // console.log(this.state.user)
     }
-
-    // async componentDidUpdate(prevProps) {
-    //     if (this.props.data.user !== prevProps.data.user)
-    //         await this.setStateAsync({ user: this.props.data.user })
-    // }
 
     render() {
         return (
@@ -69,7 +59,7 @@ class DonationPage extends React.Component {
                         <DonationForm user={this.state.user}></DonationForm>
                     </Col>
                     <Col >
-                        <BloodDropBar></BloodDropBar>
+                        <BloodDropBar user={this.props.data.user}></BloodDropBar>
                     </Col>
                 </Row>
             </Container>

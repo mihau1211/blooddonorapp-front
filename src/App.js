@@ -10,6 +10,9 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage'
 import MapsPage from './pages/MapsPage'
 import HomePage from './pages/HomePage'
+import InformationPage from './pages/InformationPage'
+import AdminMessagePage from './pages/AdminMessagesPage';
+import AdminHomePage from './pages/AdminHomePage';
 
 class App extends React.Component {
 
@@ -50,7 +53,18 @@ class App extends React.Component {
             <Route exact path='/donor/donation' render={(props) => (
               <DonationPage {...props} data={this.state.data} />
             )}></Route>
-            <Route exact path='/donor/location' component={MapsPage}></Route>
+            <Route exact path='/donor/location' render={(props) => (
+              <MapsPage {...props} data={this.state.data} />
+            )}></Route>
+            <Route exact path='/donor/info' render={(props) => (
+              <InformationPage {...props} data={this.state.data} />
+            )}></Route>
+            <Route exact path='/bloodbank' render={(props) => (
+              <AdminHomePage {...props} data={this.state.data} />
+            )}></Route>
+            <Route exact path='/bloodbank/messages' render={(props) => (
+              <AdminMessagePage {...props} data={this.state.data} />
+            )}></Route>
           </Switch>
         </Router>
       </Container >

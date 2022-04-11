@@ -1,0 +1,58 @@
+.table {
+    --bs-table-bg: #f1bec2 !important;
+    --bs-table-accent-bg: #e4a8ae !important;
+    --bs-table-striped-color: #212529 !important;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.05) !important;
+    --bs-table-active-color: #212529 !important;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1) !important;
+    --bs-table-hover-color: #212529 !important;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075) !important;
+}
+
+.sr-only{
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    border: 0 !important;
+}
+
+.number-filter {
+    display: flex !important;
+}
+
+#number-filter-comparator-age{
+    width: 45px !important
+}
+
+#number-filter-comparator-daysToNextDonation{
+    width: 45px !important
+}
+
+#number-filter-comparator-donationsNumber {
+    width: 45px !important
+}
+
+#select-filter-column-gender {
+    width: 40px;
+}
+
+#number-filter-column-age{
+    width: 60px !important
+}
+
+#number-filter-column-daysToNextDonation{
+    width: 100px !important
+}
+
+#select-filter-column-bloodType {
+    width: 80px;
+}
+
+.page-item.active .page-link {
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
